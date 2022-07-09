@@ -50,3 +50,51 @@
 // Utilities
 @import "utilities/api";
 // scss-docs-end import-stack
+
+//Custom CSS
+.brand-icon-text {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    color: $primary;
+    text-decoration: none;
+}
+
+header {
+    border-bottom: 1px solid $gray-200;
+    width: 100%;
+    position: relative;
+
+    .navbar {
+        height: 80px;
+
+        .navbar-nav {
+            li.nav-item {
+                a {
+                    &.nav-link {
+                        text-decoration: none;
+                        color: $gray-900;
+                        padding: 0 1rem;
+                        letter-spacing: 1px;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+
+            }
+
+            li.active {
+                a {
+                    &.nav-link {
+                        color: $primary;
+                    }
+                }
+            }
+        }
+    }
+}
+
+//
