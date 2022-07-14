@@ -20,7 +20,7 @@ export default function Hero(props) {
           <h1 className="fw-bold mb-3 text-capitalize">
             Forget busy work,
             <br />
-            start next holiday
+            start Next Holiday
           </h1>
           <p
             className="mb-4 pt-3 fw-light text-gray-500 w-75"
