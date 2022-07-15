@@ -7,12 +7,12 @@ import IconTreasure from "assets/images/icons/ic_treasure.svg";
 import Button from "elements/button";
 import formatNumber from "utils/formatNumber";
 export default function Hero(props) {
-  const showMostPicked = () => {
+  function showMostPicked() {
     window.scrollTo({
-      top: props.refMostPicked.current.offfsetTop - 30,
+      top: props.refMostPicked.current.offsetTop - 30,
       behavior: "smooth",
     });
-  };
+  }
   return (
     <section className="container pt-5">
       <div className="row align-items-center">

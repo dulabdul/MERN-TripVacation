@@ -44,14 +44,23 @@ export default function Button(props) {
       );
     } else {
       return (
-        <Link to={props.href} className={className.join(" ")} style={props.style} onClick={onClick}>
+        <Link
+          to={props.href}
+          className={className.join(" ")}
+          style={props.style}
+          onClick={onClick}
+        >
           {props.children}
         </Link>
       );
     }
   }
   return (
-    <button className={className.join("")} style={props.style} onClick={onClick}>
+    <button
+      className={className.join("")}
+      style={props.style}
+      onClick={onClick}
+    >
       {props.children}
     </button>
   );

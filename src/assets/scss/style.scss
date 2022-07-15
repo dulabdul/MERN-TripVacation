@@ -116,7 +116,7 @@ header {
   .tag {
     background-color: $cyan;
     color: $white;
-    min-height: 44px;
+    min-height: 30px;
     top: 0;
     right: 0;
     border-radius: 0 15px;
@@ -146,6 +146,34 @@ header {
     }
     span {
       font-size: 0.875rem;
+    }
+    &:hover {
+      a {
+        text-decoration: underline;
+      }
+    }
+  }
+  &.card-categories {
+    overflow: hidden;
+    &::after {
+      transform: scale(1.1);
+      transition: 0.5s transform ease-in-out;
+    }
+    .img-wrapper {
+      img {
+        transform: scale(1.1);
+        transition: 0.25s transform ease-in-out;
+      }
+    }
+    &:hover {
+      .img-wrapper {
+        img {
+          transform: scale(1);
+        }
+      }
+      &:after {
+        transform: scale(1);
+      }
     }
   }
   &.card-featured {
