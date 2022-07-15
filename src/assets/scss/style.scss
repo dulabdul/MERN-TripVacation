@@ -7,12 +7,14 @@
 
 // scss-docs-start import-stack
 // Configuration
+@import "colorVariables";
 @import "functions";
 @import "variables";
 @import "mixins";
 @import "utilities";
 
 // Layout & components
+
 @import "root";
 @import "reboot";
 @import "type";
@@ -232,6 +234,12 @@ header {
       }
     }
   }
+}
+
+.testi-hero,
+.testi-hero img {
+  width: 365px;
+  height: 500px;
 }
 
 //

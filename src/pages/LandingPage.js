@@ -1,9 +1,10 @@
 import React from "react";
-import Header from "elements/parts/Header";
 import landingPage from "json/landingPage.json";
-import Hero from "elements/parts/Hero";
-import MostPicked from "elements/parts/MostPicked";
-import Categories from "elements/parts/Categories";
+import Hero from "parts/Hero";
+import MostPicked from "parts/MostPicked";
+import Categories from "parts/Categories";
+import Header from "parts/Header";
+import Testimoni from "parts/Testimoni";
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +21,7 @@ class LandingPage extends React.Component {
           data={landingPage.mostPicked}
         />
         <Categories data={landingPage.categories} />
+        <Testimoni data={landingPage.testimonial} />
       </>
     );
   }
