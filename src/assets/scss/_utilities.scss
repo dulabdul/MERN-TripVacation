@@ -402,3 +402,10 @@ $utilities: map-merge(( // scss-docs-start utils-vertical-align
       )) // scss-docs-end utils-visibility
   ),
   $utilities);
+
+  @mixin hover-focus() {
+    &:hover,
+    &:focus {
+      @content;
+    }
+  }

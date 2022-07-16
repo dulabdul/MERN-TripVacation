@@ -5,6 +5,7 @@ import MostPicked from "parts/MostPicked";
 import Categories from "parts/Categories";
 import Header from "parts/Header";
 import Testimoni from "parts/Testimoni";
+import Footer from "parts/Footer";
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
@@ -22,6 +23,7 @@ class LandingPage extends React.Component {
         />
         <Categories data={landingPage.categories} />
         <Testimoni data={landingPage.testimonial} />
+        <Footer></Footer>
       </>
     );
   }

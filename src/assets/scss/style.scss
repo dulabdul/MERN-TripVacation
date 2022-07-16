@@ -7,6 +7,7 @@
 
 // scss-docs-start import-stack
 // Configuration
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap");
 @import "colorVariables";
 @import "functions";
 @import "variables";
@@ -241,5 +242,27 @@ header {
   width: 365px;
   height: 500px;
 }
-
+footer {
+  padding: 50px 0;
+  border-top: 1px solid $gray-200;
+  .list-group-item {
+    padding: 0.3125rem 0;
+    border: 0;
+    a,
+    span {
+      color: $gray-500;
+      text-decoration: none;
+      font-weight: 300;
+    }
+    a {
+      @include hover-focus {
+        color: $gray-900;
+      }
+    }
+  }
+  .copyright {
+    margin: 50px 0;
+    color: $gray-500;
+  }
+}
 //
