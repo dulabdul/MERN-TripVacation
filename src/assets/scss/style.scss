@@ -117,7 +117,9 @@ header {
   height: 100%;
 }
 .card {
-  height: 100%;
+  &.bordered {
+    border: 1px solid $gray-200;
+  }
   border-radius: 15px;
   .tag {
     background-color: $cyan;
@@ -244,7 +246,7 @@ header {
     color: $gray-500;
   }
   img {
-    margin: auto; 
+    margin: auto;
   }
 }
 .testi-hero,
