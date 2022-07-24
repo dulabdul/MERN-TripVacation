@@ -7,6 +7,10 @@ import Header from "parts/Header";
 import Testimoni from "parts/Testimoni";
 import Footer from "parts/Footer";
 class LandingPage extends React.Component {
+  componentDidMount() {
+    window.title = "TripVacation | Home";
+    window.scrollTo(0, 0);
+  }
   constructor(props) {
     super(props);
     this.refMostPicked = React.createRef();

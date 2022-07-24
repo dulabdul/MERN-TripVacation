@@ -239,12 +239,20 @@ header {
     }
   }
 }
-
+.detail-description {
+  p {
+    color: $gray-500;
+  }
+  img {
+    margin: auto; 
+  }
+}
 .testi-hero,
 .testi-hero img {
   width: 365px;
   height: 500px;
 }
+
 footer {
   padding-top: 50px;
   border-top: 1px solid $gray-200;
