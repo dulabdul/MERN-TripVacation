@@ -32,9 +32,10 @@ export default function Hero(props) {
               to make another memorable moments.
             </p>
             <Button
-              className="btn px-5 mb-2 "
+              className="btn px-5 mb-2"
               hasShadow
               isPrimary
+              isWidthAuto
               onClick={showMostPicked}
             >
               Show Me Now
@@ -83,7 +84,7 @@ export default function Hero(props) {
               <img
                 src={ImgHero}
                 className="img-fluid position-absolute"
-                alt="Hero Image"
+                alt="Hero"
                 style={{
                   margin: "0 0 0 -30px",
                   width: 520,
@@ -94,7 +95,7 @@ export default function Hero(props) {
               <img
                 src={ImgHeroFrame}
                 className="img-fluid position-absolute"
-                alt="Hero Image Frame"
+                alt="Hero Frame"
                 style={{
                   margin: "30px -15px -15px 0",
                   width: 520,

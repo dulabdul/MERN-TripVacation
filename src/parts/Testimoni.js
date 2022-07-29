@@ -37,6 +37,7 @@ export default function Testimoni({ data }) {
                 style={{ marginTop: 40 }}
                 hasShadow
                 isPrimary
+                isWidthAuto
                 type="link"
                 href={`/testimonial/${data._id}`}
               >

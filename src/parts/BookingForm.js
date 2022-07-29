@@ -101,6 +101,7 @@ export default class BookingForm extends React.Component {
           </span>{" "}
           <span className="text-gray-900">
             / {data.duration} {itemDetails.unit}
+            {data.duration > 1 ? "s" : ""}
           </span>
         </h6>
         <Button
