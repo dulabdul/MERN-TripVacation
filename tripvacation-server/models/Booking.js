@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
-const { Schema } = mongoose;
+const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema;
-const bookingSchema = new Schema({
+const bookingSchema = new mongoose.Schema({
   bookingStartDate: {
     type: Date,
     required: true,
