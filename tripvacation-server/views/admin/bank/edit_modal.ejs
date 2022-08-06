@@ -9,7 +9,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="edit_modalLabel">Edit Category</h5>
+				<h5 class="modal-title" id="edit_modalLabel">Modal title</h5>
 				<button
 					type="button"
 					class="close"
@@ -19,14 +19,32 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form action="/admin/category?_method=PUT" method="POST">
+			<form action="/admin/bank?_method=PUT" method="POST">
 				<div class="modal-body">
 					<div class="form-group">
+						<label for="nameBank">Name Bank</label>
+						<input
+							type="text"
+							class="form-control nameBank"
+							required
+							id="nameBank"
+							name="nameBank"
+							placeholder="Input Name Bank"
+						/>
+						<label for="nomorRekening">Nomor Rekening</label>
+						<input
+							type="text"
+							class="form-control nomorRekening"
+							required
+							id="nomorRekening"
+							name="nomorRekening"
+							placeholder="Input Nomor Rekening"
+						/>
 						<label for="name">Name</label>
 						<input
 							type="text"
-							required
 							class="form-control name"
+							required
 							id="name"
 							name="name"
 							placeholder="Input Name"
@@ -34,7 +52,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<input type="hidden" class="id" name="id" />
+					<input type="text" class="id" name="id" />
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">
 						Close
 					</button>
