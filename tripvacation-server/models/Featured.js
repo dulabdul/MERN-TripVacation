@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const { ObjectId } = mongoose.Schema;
 const featuredSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -12,6 +12,10 @@ const featuredSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
     required: true,
+  },
+  itemId: {
+    type: ObjectId,
+    ref: 'Category',
   },
 });
 
