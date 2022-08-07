@@ -13,10 +13,12 @@ const featuredSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  itemId: {
-    type: ObjectId,
-    ref: 'Category',
-  },
+  itemId: [
+    {
+      type: ObjectId,
+      ref: 'Category',
+    },
+  ],
 });
 
 module.exports = mongoose.model('Featured', featuredSchema);

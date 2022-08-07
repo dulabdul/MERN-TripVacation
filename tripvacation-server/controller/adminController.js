@@ -2,6 +2,7 @@
 const Category = require('../models/Category');
 const Bank = require('../models/Bank');
 const Item = require('../models/Item');
+const Image = require('../models/Image');
 const fs = require('fs-extra');
 const path = require('path');
 module.exports = {
@@ -167,18 +168,56 @@ module.exports = {
   },
   // End Of Bank Section
   // Item Section
-  viewItem: (req, res) => {
-    res.render('admin/item/view_item', { title: 'TripVacation | Item' });
+  viewItem: async (req, res) => {
+    try {
+      const category = await Category.find();
+      const item = await Item.find();
+      const alertMessage = req.flash('alertMessage');
+      const alertStatus = req.flash('alertStatus');
+      const alert = {
+        message: alertMessage,
+        status: alertStatus,
+      };
+      res.render('admin/item/view_item', {
+        title: 'TripVacation | Item',
+        category,
+        item,
+        alert,
+      });
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/admin/item');
+    }
   },
   addItem: async (req, res) => {
     try {
-      const { title, city, country, price } = req.body;
-      // console.log(nameBank, nomorRekening, name);
-      await Item.create({ title, city, country, price });
-      req.flash('alertMessage', 'Success Add Item');
-      req.flash('alertStatus', 'success');
-      res.redirect('/admin/item');
+      const { categoryId, title, city, price, description } = req.body;
+      if (req.files.length > 0) {
+        const category = await Category.findOne({ _id: categoryId });
+        const newItem = {
+          categoryId: category._id,
+          title,
+          description: description,
+          price,
+          city,
+        };
+        const item = await Item.create(newItem);
+        category.itemId.push({ _id: item._id });
+        await category.save();
+        for (let i = 0; i < req.files.length; i++) {
+          const imageSave = await Image.create({
+            imageUrl: `images/${req.files[i].filename}`,
+          });
+          item.imageId.push({ _id: imageSave._id });
+          await item.save();
+        }
+        req.flash('alertMessage', 'Success Add Item');
+        req.flash('alertStatus', 'success');
+        res.redirect('/admin/item');
+      }
     } catch (error) {
+      console.log(error);
       req.flash('alertMessage', `${error.message}`);
       req.flash('alertStatus', 'danger');
       res.redirect('/admin/item');

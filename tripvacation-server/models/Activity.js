@@ -16,10 +16,12 @@ const activitySchema = new mongoose.Schema({
   isPopular: {
     type: Boolean,
   },
-  itemId: {
-    type: ObjectId,
-    ref: 'Category',
-  },
+  itemId: [
+    {
+      type: ObjectId,
+      ref: 'Category',
+    },
+  ],
 });
 
 module.exports = mongoose.model('Activity', activitySchema);
