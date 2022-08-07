@@ -19,7 +19,7 @@ const activitySchema = new mongoose.Schema({
   itemId: [
     {
       type: ObjectId,
-      ref: 'Category',
+      ref: 'Item',
     },
   ],
 });

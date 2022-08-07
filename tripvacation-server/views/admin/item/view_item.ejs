@@ -26,6 +26,8 @@
                     <h1 class="h3 mb-4 text-gray-800">TripVacation Dashboard Item</h1>
                     <!--End of Heading-->
 
+               
+                        <% if(action == 'view'){ %>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#show-item" role="tab"
@@ -39,8 +41,30 @@
                     <div class="tab-content" id="myTabContent">
                         <%- include('tables.ejs') %>
                         <%- include('add-item.ejs') %>
-
                     </div>
+                        <% }else if(action == 'show image'){ %>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#show-image" role="tab"
+                                        aria-controls="home" aria-selected="true">Show Image</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <%- include('show-image.ejs') %>
+                            </div>
+                        <% }else{ %>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#edit-item" role="tab"
+                                        aria-controls="home" aria-selected="true">Edit Item</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <%- include('edit-item.ejs') %>
+                            </div>
+                        <% } %>
+                        
+
 
 
                 </div>
@@ -85,7 +109,6 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <%- include('edit_modal.ejs') %>
     <%- include('../../parts/js.ejs') %>
     <script>
         ClassicEditor

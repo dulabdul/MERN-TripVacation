@@ -173,7 +173,6 @@ module.exports = {
       const item = await Item.find()
         .populate({ path: 'imageId', select: 'id imageUrl' })
         .populate({ path: 'categoryId', select: 'id name' });
-      console.log(item);
       const category = await Category.find();
       const alertMessage = req.flash('alertMessage');
       const alertStatus = req.flash('alertStatus');
@@ -186,6 +185,7 @@ module.exports = {
         category,
         item,
         alert,
+        action: 'view',
       });
     } catch (error) {
       req.flash('alertMessage', `${error.message}`);
@@ -220,7 +220,63 @@ module.exports = {
         res.redirect('/admin/item');
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/admin/item');
+    }
+  },
+  showImageItem: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const item = await Item.findOne({ _id: id }).populate({
+        path: 'imageId',
+        select: 'id imageUrl',
+      });
+      // console.log(item.imageId);
+      const alertMessage = req.flash('alertMessage');
+      const alertStatus = req.flash('alertStatus');
+      const alert = {
+        message: alertMessage,
+        status: alertStatus,
+      };
+      res.render('admin/item/view_item', {
+        title: 'TripVacation | Item Image',
+        item,
+        alert,
+        action: 'show image',
+      });
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/admin/item');
+    }
+  },
+  showEditItem: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const item = await Item.findOne({ _id: id })
+        .populate({
+          path: 'imageId',
+          select: 'id imageUrl',
+        })
+        .populate({ path: 'categoryId', select: 'id name' });
+      const category = await Category.find();
+      console.log(item);
+      const alertMessage = req.flash('alertMessage');
+      const alertStatus = req.flash('alertStatus');
+      const alert = {
+        message: alertMessage,
+        status: alertStatus,
+      };
+      res.render('admin/item/view_item', {
+        title: 'TripVacation | Edit Item',
+        item,
+        category,
+        alert,
+        action: 'edit item',
+      });
+    } catch (error) {
       req.flash('alertMessage', `${error.message}`);
       req.flash('alertStatus', 'danger');
       res.redirect('/admin/item');
