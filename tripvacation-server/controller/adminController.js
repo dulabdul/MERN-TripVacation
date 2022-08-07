@@ -170,8 +170,11 @@ module.exports = {
   // Item Section
   viewItem: async (req, res) => {
     try {
+      const item = await Item.find()
+        .populate({ path: 'imageId', select: 'id imageUrl' })
+        .populate({ path: 'categoryId', select: 'id name' });
+      console.log(item);
       const category = await Category.find();
-      const item = await Item.find();
       const alertMessage = req.flash('alertMessage');
       const alertStatus = req.flash('alertStatus');
       const alert = {
