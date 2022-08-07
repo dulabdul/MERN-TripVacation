@@ -76,20 +76,20 @@
     <%- include('add_modal.ejs') %>
     <%- include('edit_modal.ejs') %>
     <%- include('../../parts/js.ejs') %>
-<script>
-    let id = $(this).data('id');
-    let nameBank = $(this).data('nameBank');
-    let nomorRekening = $(this).data('nomorRekening');
-    let name = $(this).data('name');
-    console.log(name)
-    $('#dataTable').on('click', '.button-update',function(){
-        $('#edit_modal').modal('show');
-        $('.id').val(id);
-        $('.nameBank').val(nameBank);
-        $('.nomorRekening').val(nomorRekening);
-        $('.name').val(name);
-    })
-</script>
+    <script>
+        $('#dataTable').on('click', '.button-update', function () {
+            let id = $(this).data('id');
+            let nameBank = $(this).data('name-bank');
+            let nomorRekening = $(this).data('nomor-rekening');
+            let name = $(this).data('name');
+            // console.log(nameBank)
+            $('#edit_modal').modal('show');
+            $('.id').val(id);
+            $('.nameBank').val(nameBank);
+            $('.nomorRekening').val(nomorRekening);
+            $('.name').val(name);
+        })
+    </script>
 </body>
 
 </html>
