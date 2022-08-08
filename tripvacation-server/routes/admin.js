@@ -21,6 +21,9 @@ router.get('/item', adminController.viewItem);
 router.get('/item/:id', adminController.showEditItem);
 router.get('/item/show-image/:id', adminController.showImageItem);
 router.post('/item', uploadMultiple, adminController.addItem);
+router.put('/item/:id', uploadMultiple, adminController.editItem);
+router.delete('/item/:id/delete', adminController.deleteItem);
+router.get('/item/show-detail-item/:itemId', adminController.viewDetailItem);
 // End of Endpoint Item
 router.get('/booking', adminController.viewBooking);
 

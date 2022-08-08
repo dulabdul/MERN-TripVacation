@@ -3,9 +3,10 @@
         <div class="card-body">
             <div class="row">
                 <% for (let i = 0; i < item.imageId.length; i++) { %>
-                    <div class="col-6">
-                        <img src="http://localhost:3000/<%= item.imageId[i].imageUrl %>" class="img-fluid d-block" alt="Image">
-                    </div>
+                <div class="col-auto">
+                    <img src="http://localhost:3000/<%= item.imageId[i].imageUrl %>" width="500"
+                        class="img-fluid d-block" alt="Image">
+                </div>
                 <% } %>
             </div>
             <a href="/admin/item" class="btn btn-warning mt-4"><i class="fas fa-arrow-left"></i> Back</a>
