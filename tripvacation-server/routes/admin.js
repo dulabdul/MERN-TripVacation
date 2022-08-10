@@ -23,8 +23,20 @@ router.get('/item/show-image/:id', adminController.showImageItem);
 router.post('/item', uploadMultiple, adminController.addItem);
 router.put('/item/:id', uploadMultiple, adminController.editItem);
 router.delete('/item/:id/delete', adminController.deleteItem);
-router.get('/item/show-detail-item/:itemId', adminController.viewDetailItem);
+
 // End of Endpoint Item
+// Endpoint Featured
+router.get('/item/show-detail-item/:itemId', adminController.viewDetailItem);
+router.post('/item/add/featured', upload, adminController.addFeatured);
+router.put('/item/update/featured', upload, adminController.editFeatured);
+router.delete('/item/:itemId/featured/:id', adminController.deleteFeatured);
+// End of Featured
+
+// Endpoint Activity
+router.post('/item/add/activity', upload, adminController.addActivity);
+router.put('/item/update/activity', upload, adminController.editActivity);
+router.delete('/item/:itemId/activity/:id', adminController.deleteActivity);
+// End of Endpoint Activity
 router.get('/booking', adminController.viewBooking);
 
 module.exports = router;

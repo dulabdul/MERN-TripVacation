@@ -3,6 +3,8 @@ const Category = require('../models/Category');
 const Bank = require('../models/Bank');
 const Item = require('../models/Item');
 const Image = require('../models/Image');
+const Featured = require('../models/Featured')
+const Activity = require('../models/Activity')
 const fs = require('fs-extra');
 const path = require('path');
 module.exports = {
@@ -353,6 +355,9 @@ module.exports = {
     try {
       const alertMessage = req.flash('alertMessage');
       const alertStatus = req.flash('alertStatus');
+      const featured = await Featured.find({ itemId: itemId });
+      const activity = await Activity.find({ itemId: itemId });
+      // console.log(featured)
       const alert = {
         message: alertMessage,
         status: alertStatus,
@@ -360,6 +365,9 @@ module.exports = {
       res.render('admin/item/detail-item/view_detail_item', {
         title: 'TripVacation | Detail Item',
         alert,
+        itemId,
+        featured,
+        activity
       });
     } catch (error) {
       req.flash('alertMessage', `${error.message}`);
@@ -368,6 +376,175 @@ module.exports = {
     }
   },
   // End Of Item Section
+
+  // Featured Section
+  addFeatured: async (req, res) => {
+    const { name, qty, itemId } = req.body;
+    try {
+      if (!req.file) {
+        req.flash('alertMessage', 'Image Not Found!');
+        req.flash('alertStatus', 'danger');
+        res.redirect(`/admin/item/show-detail-item/${itemId}`);
+      }
+      const featured = await Featured.create({
+        name,
+        qty,
+        itemId,
+        imageUrl: `images/${req.file.filename}`,
+      });
+      const item = await Item.findOne({ _id: itemId });
+      item.featuredId.push({ _id: featured._id });
+      await item.save();
+      req.flash('alertMessage', 'Success Add Featured');
+      req.flash('alertStatus', 'success');
+      res.redirect(`/admin/item/show-detail-item/${itemId}`);
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect(`/admin/item/show-detail-item/${itemId}`);
+    }
+  },
+  editFeatured: async (req, res) => {
+    const { id, name, qty, itemId } = req.body;
+    // console.log(id)
+    try {
+      const featured = await Featured.findOne({ _id: id });
+
+      if (req.file == undefined) {
+        featured.name = name;
+        featured.qty = qty;
+        await featured.save();
+        // console.log(id + namefeatured + nomorRekening);
+        req.flash('alertMessage', 'Success Update Featured');
+        req.flash('alertStatus', 'success');
+        res.redirect(`/admin/item/show-detail-item/${itemId}`);
+      } else {
+        await fs.unlink(path.join(`public/${featured.imageUrl}`));
+        featured.name = name;
+        featured.qty = qty;
+        featured.imageUrl = `images/${req.file.filename}`;
+        // console.log(req.file.filename);
+        await featured.save();
+        // console.log(id + namefeatured + nomorRekening);
+        req.flash('alertMessage', 'Success Update Featured');
+        req.flash('alertStatus', 'success');
+        res.redirect(`/admin/item/show-detail-item/${itemId}`);
+      }
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect(`/admin/item/show-detail-item/${itemId}`);
+    }
+  },
+  deleteFeatured: async (req, res) => {
+    const { id, itemId } = req.params;
+    try {
+      const featured = await Featured.findOne({ _id: id });
+      const item = await Item.findOne({ _id: itemId })
+        .populate('featuredId')
+      for (let i = 0; i < item.featuredId.length; i++) {
+        if (item.featuredId[i]._id.toString() === featured._id.toString()) {
+          item.featuredId.pull({ _id: featured._id });
+          await item.save()
+        }
+
+      }
+      await fs.unlink(path.join(`public/${featured.imageUrl}`));
+      await featured.remove();
+      req.flash('alertMessage', 'Success Delete Featured');
+      req.flash('alertStatus', 'success');
+      res.redirect(`/admin/item/show-detail-item/${itemId}`);
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect(`/admin/item/show-detail-item/${itemId}`);
+    }
+  },
+  // End Of Featured
+
+  // Activity Section
+  addActivity: async (req, res) => {
+    const { name, type, itemId } = req.body;
+    try {
+      if (!req.file) {
+        req.flash('alertMessage', 'Image Not Found!');
+        req.flash('alertStatus', 'danger');
+        res.redirect(`/admin/item/show-detail-item/${itemId}`);
+      }
+      const activity = await Activity.create({
+        name,
+        type,
+        itemId,
+        imageUrl: `images/${req.file.filename}`,
+      });
+      const item = await Item.findOne({ _id: itemId });
+      item.activityId.push({ _id: activity._id });
+      await item.save();
+      req.flash('alertMessage', 'Success Add Activity');
+      req.flash('alertStatus', 'success');
+      res.redirect(`/admin/item/show-detail-item/${itemId}`);
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect(`/admin/item/show-detail-item/${itemId}`);
+    }
+  },
+  editActivity: async (req, res) => {
+    const { id, name, type, itemId } = req.body;
+    try {
+      const activity = await Activity.findOne({ _id: id });
+
+      if (req.file == undefined) {
+        activity.name = name;
+        activity.type = type;
+        await activity.save();
+        // console.log(id + nameactivity + nomorRekening);
+        req.flash('alertMessage', 'Success Update Activity');
+        req.flash('alertStatus', 'success');
+        res.redirect(`/admin/item/show-detail-item/${itemId}`);
+      } else {
+        await fs.unlink(path.join(`public/${activity.imageUrl}`));
+        activity.name = name;
+        activity.type = type;
+        activity.imageUrl = `images/${req.file.filename}`;
+        // console.log(req.file.filename);
+        await activity.save();
+        // console.log(id + nameactivity + nomorRekening);
+        req.flash('alertMessage', 'Success Update Activity');
+        req.flash('alertStatus', 'success');
+        res.redirect(`/admin/item/show-detail-item/${itemId}`);
+      }
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect(`/admin/item/show-detail-item/${itemId}`);
+    }
+  },
+  deleteActivity: async (req, res) => {
+    const { id, itemId } = req.params;
+    try {
+      const activity = await Activity.findOne({ _id: id });
+      const item = await Item.findOne({ _id: itemId })
+        .populate('activityId')
+      for (let i = 0; i < item.activityId.length; i++) {
+        if (item.activityId[i]._id.toString() === activity._id.toString()) {
+          item.activityId.pull({ _id: activity._id });
+          await item.save()
+        }
+
+      }
+      await fs.unlink(path.join(`public/${activity.imageUrl}`));
+      await activity.remove();
+      req.flash('alertMessage', 'Success Delete Activity');
+      req.flash('alertStatus', 'success');
+      res.redirect(`/admin/item/show-detail-item/${itemId}`);
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect(`/admin/item/show-detail-item/${itemId}`);
+    }
+  },
+  // End of Activity
   viewBooking: (req, res) => {
     res.render('admin/booking/view_booking', {
       title: 'TripVacation | Booking',

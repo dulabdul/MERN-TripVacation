@@ -16,7 +16,7 @@ const featuredSchema = new mongoose.Schema({
   itemId: [
     {
       type: ObjectId,
-      ref: 'Category',
+      ref: 'Item',
     },
   ],
 });

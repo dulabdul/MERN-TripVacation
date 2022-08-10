@@ -84,12 +84,37 @@
 
     <!-- Bootstrap core JavaScript-->
     <%- include('../../../parts/js.ejs') %>
+    <%- include('show_modal_activity.ejs') %>
+    <%- include('show-modal-featured.ejs') %>
     <script>
         ClassicEditor
             .create(document.querySelector('#description'))
             .catch(error => {
                 console.error(error);
             });
+        $(document).ready(function () {
+            $('#dataTablesActivity').dataTable();
+        })
+        $('#dataTable').on('click', '.button-update-featured', function () {
+            let id = $(this).data('id');
+            let qty = $(this).data('qty');
+            let name = $(this).data('name');
+            // console.log(nameBank)
+            $('#edit_modal_featured').modal('show');
+            $('.id').val(id);
+            $('.name').val(name);
+            $('.qty').val(qty);
+        })
+        $('#dataTablesActivity').on('click', '.button-update-activity', function () {
+            let id = $(this).data('id');
+            let type = $(this).data('type');
+            let name = $(this).data('name');
+            // console.log(nameBank)
+            $('#edit_modal_activity').modal('show');
+            $('.id').val(id);
+            $('.name').val(name);
+            $('.type').val(type);
+        })
     </script>
 
 </body>
