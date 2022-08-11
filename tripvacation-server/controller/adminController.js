@@ -6,6 +6,8 @@ const Image = require('../models/Image');
 const Featured = require('../models/Featured')
 const Activity = require('../models/Activity')
 const Users = require('../models/Users')
+const Booking = require('../models/Booking')
+const Member = require('../models/Member')
 const fs = require('fs-extra');
 const bcrypt = require('bcryptjs');
 const path = require('path');
@@ -614,10 +616,40 @@ module.exports = {
     }
   },
   // End of Activity
-  viewBooking: (req, res) => {
-    res.render('admin/booking/view_booking', {
-      title: 'TripVacation | Booking',
-      user: req.session.user
-    });
+  viewBooking: async (req, res) => {
+    try {
+      const booking = await Booking.find()
+        .populate('memberId')
+        .populate('bankId');
+      res.render('admin/booking/view_booking', {
+        title: 'TripVacation | Booking',
+        user: req.session.user,
+        booking
+      });
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/admin/booking');
+    }
+
+  },
+  viewBookingDetail: async (req, res) => {
+    const { id } = req.params
+    try {
+      const booking = await Booking.findOne({ _id: id })
+        .populate('memberId')
+        .populate('bankId');
+      console.log(booking)
+      res.render('admin/booking/show_detail_booking', {
+        title: 'TripVacation | Detail Booking',
+        user: req.session.user,
+        booking
+      });
+    } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
+      res.redirect('/admin/booking');
+    }
+
   },
 };

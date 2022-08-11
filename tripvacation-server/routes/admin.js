@@ -44,5 +44,6 @@ router.put('/item/update/activity', upload, adminController.editActivity);
 router.delete('/item/:itemId/activity/:id', adminController.deleteActivity);
 // End of Endpoint Activity
 router.get('/booking', adminController.viewBooking);
+router.get('/booking/:id', adminController.viewBookingDetail);
 
 module.exports = router;
