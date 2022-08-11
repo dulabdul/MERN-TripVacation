@@ -5,13 +5,72 @@ const Item = require('../models/Item');
 const Image = require('../models/Image');
 const Featured = require('../models/Featured')
 const Activity = require('../models/Activity')
+const Users = require('../models/Users')
 const fs = require('fs-extra');
+const bcrypt = require('bcryptjs');
 const path = require('path');
+
 module.exports = {
+  viewLogin: async (req, res) => {
+    try {
+      const alertMessage = req.flash('alertMessage');
+      const alertStatus = req.flash('alertStatus');
+      const alert = {
+        message: alertMessage,
+        status: alertStatus,
+      };
+      if (req.session.user == null || req.session.user == undefined) {
+        res.render('index', {
+          alert,
+          title: 'TripVacation | Login',
+        });
+      } else {
+        res.redirect('/admin/dashboard')
+      }
+
+    } catch (error) {
+      res.redirect('/admin/login');
+    }
+  },
+  actionLogin: async (req, res) => {
+    try {
+      const { username, password } = req.body;
+      const user = await Users.findOne({ username: username })
+      if (!user) {
+        req.flash('alertMessage', 'User Not Found!');
+        req.flash('alertStatus', 'danger');
+        res.redirect('/admin/login');
+      }
+      const isPasswordMatch = await bcrypt.compare(password, user.password);
+      if (!isPasswordMatch) {
+        req.flash('alertMessage', 'Wrong Passoword!');
+        req.flash('alertStatus', 'danger');
+        res.redirect('/admin/login');
+      }
+      req.session.user = {
+        id: user.id,
+        username: user.username
+      }
+      res.redirect('/admin/dashboard')
+    } catch (error) {
+
+    }
+  },
+  actionLogout: async (req, res) => {
+    req.session.destroy();
+    res.redirect('/admin/login')
+  },
+  // 
   viewDashboard: (req, res) => {
-    res.render('admin/dashboard/view_dashboard', {
-      title: 'TripVacation | Dashboard',
-    });
+    try {
+      res.render('admin/dashboard/view_dashboard', {
+        title: 'TripVacation | Dashboard',
+        user: req.session.user
+      });
+    } catch (error) {
+      console.log(error)
+    }
+
   },
   // Category Section
   viewCategory: async (req, res) => {
@@ -28,8 +87,11 @@ module.exports = {
         category,
         alert,
         title: 'TripVacation | Category',
+        user: req.session.user
       });
     } catch (error) {
+      req.flash('alertMessage', `${error.message}`);
+      req.flash('alertStatus', 'danger');
       res.redirect('/admin/category');
     }
   },
@@ -91,11 +153,13 @@ module.exports = {
       const alert = {
         message: alertMessage,
         status: alertStatus,
+        user: req.session.user
       };
       res.render('admin/bank/view_bank', {
         bank,
         alert,
         title: 'TripVacation | Bank',
+        user: req.session.user
       });
     } catch (error) {
       res.redirect('/admin/bank');
@@ -111,6 +175,7 @@ module.exports = {
         nomorRekening,
         name,
         imageUrl: `images/${req.file.filename}`,
+
       });
       req.flash('alertMessage', 'Success Add Bank');
       req.flash('alertStatus', 'success');
@@ -188,6 +253,7 @@ module.exports = {
         item,
         alert,
         action: 'view',
+        user: req.session.user
       });
     } catch (error) {
       req.flash('alertMessage', `${error.message}`);
@@ -247,6 +313,7 @@ module.exports = {
         item,
         alert,
         action: 'show image',
+        user: req.session.user
       });
     } catch (error) {
       req.flash('alertMessage', `${error.message}`);
@@ -277,6 +344,7 @@ module.exports = {
         category,
         alert,
         action: 'edit item',
+        user: req.session.user
       });
     } catch (error) {
       req.flash('alertMessage', `${error.message}`);
@@ -367,7 +435,8 @@ module.exports = {
         alert,
         itemId,
         featured,
-        activity
+        activity,
+        user: req.session.user
       });
     } catch (error) {
       req.flash('alertMessage', `${error.message}`);
@@ -548,6 +617,7 @@ module.exports = {
   viewBooking: (req, res) => {
     res.render('admin/booking/view_booking', {
       title: 'TripVacation | Booking',
+      user: req.session.user
     });
   },
 };

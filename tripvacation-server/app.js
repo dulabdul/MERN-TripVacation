@@ -12,7 +12,7 @@ const methodOverride = require("method-override");
 const flash = require("connect-flash");
 const session = require("express-session");
 const app = express();
-
+let time = new Date(Date.now() + (30 * 86400 + 1000))
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -31,7 +31,7 @@ app.use(
 		secret: "keyboard cat",
 		resave: false,
 		saveUninitialized: true,
-		cookie: { maxAge: 60000 },
+		cookie: { maxAge: time },
 	})
 );
 app.use(flash());
