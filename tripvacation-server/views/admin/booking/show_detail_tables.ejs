@@ -1,46 +1,76 @@
 <div class="card shadow mb-4">
-    <div class="card-header py-3">
-        <a href="/admin/booking" class="btn btn-warning mt-4"><i class="fas fa-arrow-left"></i> Back</a>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <img src="http://localhost:3000/<%= booking.payments.proofPayment %>" width="400"
-                class="img-fluid d-block m-auto" alt="Image">
-            <div class="row mt-4 pb-5 ml-1">
-                <form action="/admin/item/add/activity" class="ml-3" method="POST" enctype="multipart/form-data">
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i>Confirmation</button>
-                </form>
-                <form action="/admin/item/add/activity" class="ml-3" method="POST" enctype="multipart/form-data">
-                    <button type="submit" class="btn btn-danger"><i class="fas fa-times"></i>Confirmation</button>
-                </form>
-            </div>
-        </div>
-        <div class="col-7">
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTablesActivity" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Name Member</th>
-                                <th>Total</th>
-                                <th>Bank</th>
-                                <th>Nomor Rekening</th>
-                                <th>Title</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><%= booking.memberId.firstName %> <%= booking.memberId.lastName %></td>
-                                <td>$<%= booking.total %></td>
-                                <td><%= booking.bankId.nameBank %></td>
-                                <td><%= booking.bankId.nomorRekening %></td>
-                                <td><%= booking.itemId.title %></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="card-header py-3">
+		<a href="/admin/booking" class="btn btn-warning mt-4"
+			><i class="fas fa-arrow-left"></i> Back</a
+		>
+	</div>
+	<div class="row">
+		<div class="col-4">
+			<img
+				src="http://localhost:3000/<%= booking.payments.proofPayment %>"
+				width="400"
+				class="img-fluid d-block m-auto"
+				alt="Image"
+			/>
+			<div class="row mt-4 pb-5 ml-1">
+				<% if (booking.payments.status === 'Proses') {%>
+				<form
+					action="/admin/booking/<%= booking.id %>/confirmation?_method=PUT"
+					class="ml-3"
+					method="POST"
+					enctype="multipart/form-data"
+				>
+					<button type="submit" class="btn btn-primary">
+						<i class="fas fa-check"></i> Confirmation
+					</button>
+				</form>
+				<form
+					action="/admin/booking/<%= booking.id %>/reject?_method=PUT"
+					class="ml-3"
+					method="POST"
+					enctype="multipart/form-data"
+				>
+					<button type="submit" class="btn btn-danger">
+						<i class="fas fa-times"></i> Reject
+					</button>
+				</form>
 
+				<% } %>
+			</div>
+		</div>
+		<div class="col-7">
+			<div class="card-body">
+				<div class="table-responsive">
+					<table
+						class="table table-bordered"
+						id="dataTablesActivity"
+						width="100%"
+						cellspacing="0"
+					>
+						<thead>
+							<tr>
+								<th>Name Member</th>
+								<th>Total</th>
+								<th>Bank</th>
+								<th>Nomor Rekening</th>
+								<th>Title</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<%= booking.memberId.firstName %> <%=
+									booking.memberId.lastName %>
+								</td>
+								<td>$<%= booking.total %></td>
+								<td><%= booking.bankId.nameBank %></td>
+								<td><%= booking.bankId.nomorRekening %></td>
+								<td><%= booking.itemId.title %></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
