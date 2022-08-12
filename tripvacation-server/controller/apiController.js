@@ -3,6 +3,8 @@ const Treasure = require('../models/Activity');
 const Item = require('../models/Item');
 const Category = require('../models/Category');
 const Bank = require('../models/Bank');
+const Member = require('../models/Member');
+const Booking = require('../models/Booking');
 module.exports = {
 	landingPage: async (req, res) => {
 		try {
@@ -93,4 +95,77 @@ module.exports = {
 			res.status(500).json({ message: 'Internal Server Error' });
 		}
 	},
+	bookingPage: async (req, res) => {
+		try {
+			const {
+				itemId,
+				duration,
+				bookingStartDate,
+				bookingEndDate,
+				firstName,
+				lastName,
+				email,
+				phoneNumber,
+				bankFrom,
+				accountHolder
+			} = req.body;
+			if (!req.file) {
+				return res.status(404).json({ message: "Image Not Found!" })
+			}
+			if (
+				itemId === undefined ||
+				duration === undefined ||
+				bookingStartDate === undefined ||
+				bookingEndDate === undefined ||
+				firstName === undefined ||
+				lastName === undefined ||
+				email === undefined ||
+				phoneNumber === undefined ||
+				bankFrom === undefined ||
+				accountHolder === undefined
+			) {
+				res.status(404).json({ message: "Completed All Field" })
+			}
+			const item = await Item.findOne({ _id: itemId });
+			if (!item) {
+				return res.status(404).json({ message: "Item Not Found!" })
+			}
+			item.sumBooking += 1;
+			await item.save();
+			let total = item.price * duration;
+			let tax = total * 0.10;
+			const invoice = Math.floor(1000000 + Math.random() * 9000000)
+
+			const member = await Member.create({
+				firstName,
+				lastName,
+				email,
+				phoneNumber
+			});
+			const newBooking = {
+				invoice,
+				bookingStartDate,
+				bookingEndDate,
+				total: total += tax,
+				itemId: {
+					_id: item.id,
+					title: item.title,
+					price: item.price,
+					duration: duration
+				},
+				memberId: member.id,
+				payments: {
+					proofPayment: `images/${req.file.filename}`,
+					bankFrom: bankFrom,
+					accountHolder: accountHolder
+				}
+			}
+			const booking = await Booking.create(newBooking)
+
+			res.status(200).json({ message: "Succes Booking", booking })
+		} catch (error) {
+			console.log(error)
+		}
+
+	}
 };
