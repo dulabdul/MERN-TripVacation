@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const auth = require('../middlewares/auth')
+const auth = require('../middlewares/auth');
 const adminController = require('../controller/adminController');
 const { upload, uploadMultiple } = require('../middlewares/multer');
 
 router.get('/login', adminController.viewLogin);
 router.post('/login', adminController.actionLogin);
-router.use(auth)
+router.use(auth);
 router.get('/logout', adminController.actionLogout);
 router.get('/dashboard', adminController.viewDashboard);
 // Endpoint Category
@@ -45,5 +45,6 @@ router.delete('/item/:itemId/activity/:id', adminController.deleteActivity);
 // End of Endpoint Activity
 router.get('/booking', adminController.viewBooking);
 router.get('/booking/:id', adminController.viewBookingDetail);
-
+router.put('/booking/:id/confirmation', adminController.actionConfirmation);
+router.put('/booking/:id/reject', adminController.actionReject);
 module.exports = router;
