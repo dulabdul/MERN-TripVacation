@@ -1,0 +1,41 @@
+<div class="tab-pane fade" id="add-item" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="card-show mb mt-4">
+        <div class="card-body">
+            <form action="/admin/item" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" required id="title" name="title"
+                        placeholder="Input Title" />
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" required id="city" name="city" placeholder="Input City" />
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" required id="price" name="price"
+                        placeholder="Input Price" />
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select name="categoryId" id="categoryId" class="form-control">
+                        <option value="">--- Category ---</option>
+                        <% for (let i = 0; i < category.length; i++) { %>
+                            <option value="<%= category[i].id %>"><%= category[i].name %></option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control" multiple required id="image" name="image" />
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea type="file" class="form-control" id="description" name="description">
+                            </textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+        </div>
+    </div>
+</div>
