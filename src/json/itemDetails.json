@@ -96,6 +96,43 @@
       "imageUrl": "/images/categoryItem4.png"
     }
   ],
+  "categories": [{
+    "_id": "asd1293uasdads1",
+    "name": "Things to do",
+    "items": [{
+        "_id": "asd1293uasdads1",
+        "name": "PSW Antasari",
+        "imageUrl": "/images/img-category_1.jpg",
+        "country": "South Korea",
+        "city": "Seoul Flore",
+        "isPopular": true
+      },
+      {
+        "_id": "asd1293uasdads1",
+        "name": "Kuretakeso",
+        "imageUrl": "/images/img-category_2.jpg",
+        "country": "South Korea",
+        "city": "Seoul Flore",
+        "isPopular": false
+      },
+      {
+        "_id": "asd1293uasdads1",
+        "name": "Arya Duta",
+        "imageUrl": "/images/img-category_3.jpg",
+        "country": "South Korea",
+        "city": "Seoul Flore",
+        "isPopular": false
+      },
+      {
+        "_id": "asd1293uasdads1",
+        "name": "Grand Dhika",
+        "imageUrl": "/images/img-category_4.jpg",
+        "country": "South Korea",
+        "city": "Seoul Flore",
+        "isPopular": false
+      }
+    ]
+  }],
   "testimonial": {
     "_id": "asd1293uasdads1",
     "imageUrl": "/images/img-testi-detail.jpg",

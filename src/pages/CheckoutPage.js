@@ -1,28 +1,29 @@
-import Header from "parts/Header";
-import React from "react";
-import Fade from "react-reveal/Fade";
-import Button from "elements/button";
+import Header from 'parts/Header';
+import React from 'react';
+import Fade from 'react-reveal/Fade';
+import Button from 'elements/button';
 import Stepper, {
   Numbering,
   Meta,
   MainContent,
   Controller,
-} from "elements/Stepper";
-import BookingInformation from "parts/Checkout/BookingInformation";
-import Payment from "parts/Checkout/Payment";
-import Completed from "parts/Checkout/Completed";
-import ItemDetails from "json/itemDetails.json";
+} from 'elements/Stepper';
+import { connect } from 'react-redux';
+import BookingInformation from 'parts/Checkout/BookingInformation';
+import Payment from 'parts/Checkout/Payment';
+import Completed from 'parts/Checkout/Completed';
+import ItemDetails from 'json/itemDetails.json';
 
-export default class CheckoutPage extends React.Component {
+class CheckoutPage extends React.Component {
   state = {
     data: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      proofPayment: "",
-      bankName: "",
-      bankHolder: "",
+      firstName: '',
+      lastName: '',
+      email: '',
+      phone: '',
+      proofPayment: '',
+      bankName: '',
+      bankHolder: '',
     },
   };
   onChange = (e) => {
@@ -38,13 +39,30 @@ export default class CheckoutPage extends React.Component {
   }
   render() {
     const { data } = this.state;
-    const checkout = {
-      duration: 3,
-    };
+    const { checkout } = this.props;
+
+    if (!checkout)
+      return (
+        <div className='container'>
+          <div
+            className='row align-items-center justify-content-center text-center'
+            style={{ height: '100vh' }}
+          >
+            <div className='col-3'>
+              Choose Room Please !
+              <div>
+                <Button className='btn mt-5' type='link' href='/' isLight>
+                  Back
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
     const steps = {
       bookingInformation: {
-        title: "Booking Information",
-        description: "Please fill up the blank fields below",
+        title: 'Booking Information',
+        description: 'Please fill up the blank fields below',
         content: (
           <BookingInformation
             data={data}
@@ -55,8 +73,8 @@ export default class CheckoutPage extends React.Component {
         ),
       },
       payment: {
-        title: "Payment",
-        description: "Kindly follow the instruction bellow",
+        title: 'Payment',
+        description: 'Kindly follow the instruction bellow',
         content: (
           <Payment
             data={data}
@@ -67,7 +85,7 @@ export default class CheckoutPage extends React.Component {
         ),
       },
       completed: {
-        title: "Yay! Completed",
+        title: 'Yay! Completed',
         description: null,
         content: <Completed />,
       },
@@ -85,17 +103,17 @@ export default class CheckoutPage extends React.Component {
               />
               <Meta data={steps} current={CurrentStep} />
               <MainContent data={steps} current={CurrentStep} />
-              {CurrentStep === "bookingInformation" && (
+              {CurrentStep === 'bookingInformation' && (
                 <Fade>
                   <Controller>
-                    {data.firstName !== "" &&
-                      data.lastName !== "" &&
-                      data.email !== "" &&
-                      data.phone !== "" && (
+                    {data.firstName !== '' &&
+                      data.lastName !== '' &&
+                      data.email !== '' &&
+                      data.phone !== '' && (
                         <Fade>
                           <Button
-                            className="btn mb-3 px-5"
-                            type="button"
+                            className='btn mb-3 px-5'
+                            type='button'
                             isBlock
                             isPrimary
                             hasShadow
@@ -106,8 +124,8 @@ export default class CheckoutPage extends React.Component {
                         </Fade>
                       )}
                     <Button
-                      className="btn"
-                      type="link"
+                      className='btn'
+                      type='link'
                       isBlock
                       isLight
                       href={`/properties/${ItemDetails._id}`}
@@ -117,15 +135,15 @@ export default class CheckoutPage extends React.Component {
                   </Controller>
                 </Fade>
               )}
-              {CurrentStep === "payment" && (
+              {CurrentStep === 'payment' && (
                 <Controller>
-                  {data.proofPayment !== "" &&
-                    data.bankName !== "" &&
-                    data.bankHolder !== "" && (
+                  {data.proofPayment !== '' &&
+                    data.bankName !== '' &&
+                    data.bankHolder !== '' && (
                       <Fade>
                         <Button
-                          className="btn px-5 mb-3"
-                          type="button"
+                          className='btn px-5 mb-3'
+                          type='button'
                           isBlock
                           isPrimary
                           hasShadow
@@ -136,8 +154,8 @@ export default class CheckoutPage extends React.Component {
                       </Fade>
                     )}
                   <Button
-                    className="btn px-5"
-                    type="button"
+                    className='btn px-5'
+                    type='button'
                     isBlock
                     isLight
                     onClick={prevStep}
@@ -146,15 +164,15 @@ export default class CheckoutPage extends React.Component {
                   </Button>
                 </Controller>
               )}
-              {CurrentStep === "completed" && (
+              {CurrentStep === 'completed' && (
                 <Controller>
                   <Button
-                    className="btn"
-                    type="link"
+                    className='btn'
+                    type='link'
                     isBlock
                     isPrimary
                     hasShadow
-                    href=""
+                    href=''
                   >
                     Back to Home
                   </Button>
@@ -167,3 +185,8 @@ export default class CheckoutPage extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  checkout: state.checkout,
+});
+export default connect(mapStateToProps)(CheckoutPage);
