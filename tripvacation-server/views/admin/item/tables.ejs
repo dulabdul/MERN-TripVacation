@@ -12,6 +12,7 @@
                             <th>City</th>
                             <th>Country</th>
                             <th>Price</th>
+                            <th>Category</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -32,6 +33,9 @@
                             </td>
                             <td>
                                 $<%= item[i].price %>
+                            </td>
+                            <td>
+                                <%= item[i].categoryId.name %>
                             </td>
                             <td>
                                 <form action="/admin/item/<%= item[i].id %>/delete?_method=DELETE" method="POST">

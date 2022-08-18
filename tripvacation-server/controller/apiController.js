@@ -33,7 +33,7 @@ module.exports = {
           },
         });
       const testimonial = {
-        imageUrl: 'images/testimonial1.jpg',
+        imageUrl: 'images/img-testi-home.jpg',
         name: 'Couple Trip',
         rate: 4.7,
         content:
@@ -80,7 +80,7 @@ module.exports = {
 
       const bank = await Bank.find();
       const testimonial = {
-        imageUrl: 'images/testimonial2.jpg',
+        imageUrl: 'images/img-testi-detail.jpg',
         name: 'Couple Trip',
         rate: 4.7,
         content:
