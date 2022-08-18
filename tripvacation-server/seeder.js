@@ -263,12 +263,7 @@ var data = [
           // done
           { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90aa08') },
         ],
-        activityId: [
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb01') },
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb02') },
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb03') },
-          { _id: mongoose.Types.ObjectId('5e96cbe292b97300fc90bb04') },
-        ],
+        activityId: [],
         categoryId: '5e96cbe292b97300fc901111',
       },
 
