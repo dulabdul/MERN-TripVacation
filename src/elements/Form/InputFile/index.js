@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
-import propTypes from "prop-types";
-import "./index.scss";
+import React, { useRef, useState } from 'react';
+import propTypes from 'prop-types';
+import './index.scss';
 export default function InputFile(props) {
+  const [FileName, setFileName] = useState('');
   const {
     value,
     name,
@@ -14,32 +15,42 @@ export default function InputFile(props) {
   } = props;
 
   const refInputFile = useRef(null);
+
+  const onChange = (e) => {
+    setFileName(e.target.value);
+    props.onChange({
+      target: {
+        name: e.target.name,
+        value: e.target.files,
+      },
+    });
+  };
   return (
-    <div className={["input-text mb-3", outerClassName].join(" ")}>
-      <div className="input-group">
+    <div className={['input-text mb-3', outerClassName].join(' ')}>
+      <div className='input-group'>
         {prepend && (
-          <div className="input-group-prepend bg-gray-900">
-            <span className="input-group-text">{prepend}</span>
+          <div className='input-group-prepend bg-gray-900'>
+            <span className='input-group-text'>{prepend}</span>
           </div>
         )}
         <input
-          type="file"
+          type='file'
           name={name}
           ref={refInputFile}
-          value={value}
-          onChange={props.onChange}
+          value={FileName}
+          onChange={onChange}
           accept={accept}
-          className="d-none"
+          className='d-none'
         />
         <input
           onClick={() => refInputFile.current.click()}
-          defaultValue={value}
+          defaultValue={FileName}
           placeholder={placeholder}
-          className={["form-control", inputClassName].join(" ")}
+          className={['form-control', inputClassName].join(' ')}
         />
         {append && (
-          <div className="input group-append bg-gray-900">
-            <span className="input-group-text">{append}</span>
+          <div className='input group-append bg-gray-900'>
+            <span className='input-group-text'>{append}</span>
           </div>
         )}
       </div>
@@ -48,7 +59,7 @@ export default function InputFile(props) {
 }
 
 InputFile.defaultProps = {
-  placeholder: "Browse a file...",
+  placeholder: 'Browse a file...',
 };
 InputFile.propTypes = {
   name: propTypes.string.isRequired,

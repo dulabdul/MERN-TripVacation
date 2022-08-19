@@ -1,36 +1,44 @@
-import React from "react";
-import landingPage from "json/landingPage.json";
-import Hero from "parts/Hero";
-import MostPicked from "parts/MostPicked";
-import Categories from "parts/Categories";
-import Header from "parts/Header";
-import Testimoni from "parts/Testimoni";
-import Footer from "parts/Footer";
+import React from 'react';
+import Hero from 'parts/Hero';
+import MostPicked from 'parts/MostPicked';
+import Categories from 'parts/Categories';
+import Header from 'parts/Header';
+import { connect } from 'react-redux';
+import Testimoni from 'parts/Testimoni';
+import Footer from 'parts/Footer';
+import { fetchPage } from 'store/actions/page';
 class LandingPage extends React.Component {
-  componentDidMount() {
-    window.title = "TripVacation | Home";
-    window.scrollTo(0, 0);
-  }
   constructor(props) {
     super(props);
     this.refMostPicked = React.createRef();
   }
+  componentDidMount() {
+    window.title = 'TripVacation | Home';
+    window.scrollTo(0, 0);
+
+    if (!this.props.landingPage)
+      this.props.fetchPage(`/landing-page`, 'landingPage');
+  }
+
   render() {
-    console.log(this.props);
+    const { page } = this.props;
+    if (!page.hasOwnProperty('landingPage')) return null;
     return (
       <>
         <Header {...this.props}></Header>
-        <Hero refMostPicked={this.refMostPicked} data={landingPage.hero} />
+        <Hero refMostPicked={this.refMostPicked} data={page.landingPage.hero} />
         <MostPicked
           refMostPicked={this.refMostPicked}
-          data={landingPage.mostPicked}
+          data={page.landingPage.mostPicked}
         />
-        <Categories data={landingPage.categories} />
-        <Testimoni data={landingPage.testimonial} />
+        <Categories data={page.landingPage.category} />
+        <Testimoni data={page.landingPage.testimonial} />
         <Footer></Footer>
       </>
     );
   }
 }
-
-export default LandingPage;
+const mapStateToProps = (state) => ({
+  page: state.page,
+});
+export default connect(mapStateToProps, { fetchPage })(LandingPage);

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import propTypes from "prop-types";
+import React, { useState } from 'react';
+import propTypes from 'prop-types';
 export default function Stepper(props) {
   const { steps, initialStep } = props;
   const stepsKeys = Object.keys(steps);
@@ -24,7 +24,7 @@ Stepper.propTypes = {
   initialStep: propTypes.string,
 };
 
-export { default as Controller } from "./Controller";
-export { default as MainContent } from "./MainContent";
-export { default as Meta } from "./Meta";
-export { default as Numbering } from "./Numbering";
+export { default as Controller } from './Controller';
+export { default as MainContent } from './MainContent';
+export { default as Meta } from './Meta';
+export { default as Numbering } from './Numbering';
