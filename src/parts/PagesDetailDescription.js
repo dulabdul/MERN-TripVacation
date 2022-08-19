@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 export default function PagesDetailDescription({ data }) {
   return (
     <section className='detail-description'>
       <h3 className='h4'>About the place</h3>
-      {ReactHtmlParser(data.description)}
+      {parse(data.description)}
       {/* {data.description} */}
       <div className='row' style={{ marginTop: 30 }}>
         {data.featuredId.length === 0
