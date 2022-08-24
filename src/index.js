@@ -3,11 +3,16 @@ import { createRoot } from 'react-dom/client';
 import App from 'App';
 import { Provider } from 'react-redux';
 import store from 'store';
+import { BrowserRouter } from 'react-router-dom';
 /* eslint-disable import/no-unresolved */
 
 const root = createRoot(document.querySelector('#root'));
 root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <React.Fragment>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.Fragment>
 );

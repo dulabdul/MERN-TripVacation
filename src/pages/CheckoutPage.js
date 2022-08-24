@@ -198,7 +198,7 @@ class CheckoutPage extends React.Component {
                     isBlock
                     isPrimary
                     hasShadow
-                    href=''
+                    href='/'
                   >
                     Back to Home
                   </Button>
