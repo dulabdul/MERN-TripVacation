@@ -17,12 +17,12 @@ const session = require('express-session');
 const app = express();
 const cors = require('cors');
 
-// const corsOptions = {
-//   origin: 'http://localhost:3000',
-//   credentials: true,
-//   optionSuccessStatus: 200,
-// };
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 let time = new Date(Date.now() + (30 * 86400 + 1000));
 let sess = {
   secret: 'keyboard_cat',
