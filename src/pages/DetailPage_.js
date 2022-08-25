@@ -42,12 +42,12 @@ function DetailPage() {
       <FeaturedImageDetails />
       <section className='container'>
         <div className='row'>
-          <div className='col-7 pr-5'>
+          <div className='col-12 col-lg-7'>
             <Fade bottom>
               <PagesDetailDescription data={page[id]} />
             </Fade>
           </div>
-          <div className='col-5'>
+          <div className='col-12 col-lg-5'>
             <Fade bottom>
               <BookingForm />
             </Fade>

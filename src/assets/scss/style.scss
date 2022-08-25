@@ -66,6 +66,9 @@ section {
   margin-bottom: 70px;
 }
 
+.bg-light {
+  background-color: #fff !important;
+}
 .brand-icon-text {
   font-style: normal;
   font-size: 24px;
@@ -73,13 +76,9 @@ section {
   text-decoration: none;
 }
 
-header {
-  border-bottom: 1px solid $gray-200;
-  width: 100%;
-  position: relative;
+header{
+  border-bottom: 1px solid #e9ecef;
   .navbar {
-    height: 80px;
-
     .navbar-nav {
       li.nav-item {
         a {
@@ -105,6 +104,32 @@ header {
       }
     }
   }
+
+}
+.hero-container{
+  .row{
+    div:nth-child(1){
+      padding-left: 3rem;
+    }
+    div:nth-child(2){
+      padding-right: 1.5rem;
+    }
+  }
+  padding-top: 3rem;
+  h1{
+    margin-bottom: 1rem;
+  }
+  p{
+    margin-bottom: .5rem;
+  }
+  .hero-image-container{
+    width: 520px;
+    height: 400px;
+    img{
+      width: 520px;
+      height: 400px;
+    }
+  }
 }
 .img-cover {
   object-fit: cover;
@@ -115,6 +140,9 @@ header {
   object-fit: contain;
   width: 100%;
   height: 100%;
+}
+.booking-card{
+  padding: 70px;
 }
 .card {
   &.bordered {
@@ -277,8 +305,25 @@ header {
   width: 365px;
   height: 500px;
 }
-
-footer {
+.booking-information, .payment-information{
+  .row{
+    .one-booking{
+      padding-right: 80px;
+    }
+    .two-booking{
+      padding-left: 80px;
+    }
+  }
+}
+.footer {
+  .row{
+    div:nth-child(2){
+      margin-left: 3rem;
+    }
+    div:nth-child(3){
+      margin-left: 3rem;
+    }
+  }
   padding-top: 50px;
   border-top: 1px solid $gray-200;
   .list-group-item {
@@ -301,4 +346,189 @@ footer {
     color: $gray-500;
   }
 }
-//
+.testi-img-container{
+  margin-right: 70px;
+}
+.testi-content{
+  h4{
+    padding-top: 0;
+    margin-bottom: 40px;
+  }
+}
+// Responsive Tablet
+
+@media (max-width: 991.98px) { 
+  header{
+    .navbar {
+      .navbar-nav {
+        li.nav-item {
+          a {
+            &.nav-link {
+              padding: .2rem .1rem;
+  
+            }
+          }
+        }
+      }
+    }
+  }
+  .hero-container{
+    .row{
+      div:nth-child(1){
+        padding-left: 1rem;
+      }
+      div:nth-child(2){
+        padding-right: 0;
+      }
+    }
+    .hero-image-container{
+      width: 380px;
+      height: 400px;
+      img{
+        width: 380px;
+        height: 400px;
+      }
+    }
+  }
+  .container-mostpicked, .container-category, .container-activity{
+    .item.column-4, .item.column-3{
+      grid-column-end: span 6;
+    }
+
+  }
+  .booking-information, .payment-information{
+    margin-bottom: 30px;
+    .row{
+      justify-content: normal !important;
+      .one-booking{
+        padding-right: 0;
+      }
+      .two-booking{
+        padding-left: 12px;
+      }
+    }
+  }
+  .card{
+    .tag{
+      padding: .3rem  .7rem;
+    }
+  }
+  .testi-hero,
+  .testi-hero img {
+    width: 300px;
+    height: 400px;
+  }
+  .testi-img-container{
+    margin-right: 0;
+  }
+  .footer{
+    .row{
+      div:nth-child(1){
+        width: 500px;
+      }
+      div:nth-child(2){
+        margin-left:0;
+      }
+      div:nth-child(3){
+        margin-left: 0;
+      }
+      div:nth-child(4){
+        margin-left: 0;
+        padding-top: .8rem;
+      }
+    }
+  }
+ }
+
+
+// RESPONSIVE Mobile //
+
+@media (max-width: 575.98px) { 
+  section{
+    margin-bottom: 30px;
+  }
+  .booking-card{
+    padding: 35px;
+  }
+  .hero-container{
+    padding-top: 1rem;
+    h1{
+      margin-bottom: .5rem;
+    }
+    p{
+      margin-bottom: .5rem;
+    }
+    .hero-image-container{
+      width: 320px;
+      height: 250px;
+      img{
+        width: 320px;
+        height: 250px;
+      }
+    }
+  }
+  .container-mostpicked, .container-category, .container-activity{
+    .item.column-4, .item.column-3{
+      grid-column-end: span 12;
+    }
+
+  }
+  .container-detail{
+    .item.column-7, .item.column-5{
+      grid-column-end: span 12;
+    }
+  }
+.testi-hero,
+.testi-hero img {
+  width: 335px;
+  height: 450px;
+}
+.testi-img-container{
+  margin-right: 0;
+  padding-top: 30px;
+}
+.testi-content{
+  margin-bottom: 30px;
+  h4{
+    padding-top: .7rem;
+    margin-bottom: 15px;
+  }
+}
+.booking-information, .payment-information{
+  margin-bottom: 30px;
+  .row{
+    justify-content: normal !important;
+    .one-booking{
+      padding-right: 0;
+    }
+    .two-booking{
+      padding-left: 12px;
+    }
+  }
+}
+.footer{
+  .row{
+    div:nth-child(2){
+      margin-left:0;
+    }
+    div:nth-child(3){
+      margin-left: 0;
+    }
+  }
+}
+header{
+  .navbar {
+    .navbar-nav {
+      li.nav-item {
+        a {
+          &.nav-link {
+            padding: .2rem .1rem;
+
+          }
+        }
+      }
+    }
+  }
+}
+}
+// End Of Responsive

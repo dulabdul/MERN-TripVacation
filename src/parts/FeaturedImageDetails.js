@@ -9,7 +9,7 @@ export default function FeaturedImageDetails() {
 
   return (
     <section className='container'>
-      <div className='container-grid sm'>
+      <div className='container-grid container-detail sm'>
         {data.map((item, index) => {
           return (
             <div

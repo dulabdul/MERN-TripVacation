@@ -59,7 +59,7 @@ function BookingForm() {
     navigate('/checkout');
   }
   return (
-    <div className='card bordered' style={{ padding: 70 }}>
+    <div className='card bordered booking-card'>
       <h4 className='mb-3'>Start Booking</h4>
       <h5 className='text-gray-900 mb-4'>
         ${itemDetails.price}{' '}

@@ -11,10 +11,10 @@ export default function PageDetailTitle({ breadcrumb }) {
     <section className='container spacing-sm pt-5'>
       <Fade bottom>
         <div className='row align-items-center'>
-          <div className='col'>
+          <div className='col col-12'>
             <Breadcrumb data={breadcrumb} />
           </div>
-          <div className='col-auto text-center'>
+          <div className='col-auto col-12 text-center'>
             <h1 className='h2'>{data.title}</h1>
             <span className='text-gray-500'>
               {data.city}, {data.country}

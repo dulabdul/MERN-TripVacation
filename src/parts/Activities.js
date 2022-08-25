@@ -4,7 +4,7 @@ import Fade from 'react-reveal/Fade';
 export default function Activities({ data }) {
   if (data.length === 0) return null;
   return (
-    <section className='container'>
+    <section className='container container-activity'>
       <Fade bottom>
         <h4 className='mb-3 fw-medium'>Activities</h4>
         <div className='container-grid'>

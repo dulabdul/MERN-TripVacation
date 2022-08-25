@@ -64,3 +64,13 @@ ol.stepper {
     }
   }
 }
+
+@media (max-width: 575.98px){
+  ol.stepper{
+    li{
+      &:not(:last-child){
+        margin: 30px;
+      }
+    }
+  }
+}

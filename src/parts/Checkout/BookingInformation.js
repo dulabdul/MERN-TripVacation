@@ -5,9 +5,12 @@ export default function BookingInformation(props) {
   const { data, ItemDetails, checkout } = props;
   return (
     <Fade>
-      <div className='container' style={{ marginBottom: 30 }}>
+      <div
+        className='container booking-information'
+        style={{ marginBottom: 30 }}
+      >
         <div className='row justify-content-center align-items-center'>
-          <div className='col-5 border-right py-5' style={{ paddingRight: 80 }}>
+          <div className='col-12 one-booking col-lg-5 border-right py-3'>
             <Fade delay={300}>
               <div className='card'>
                 <figure className='img-wrapper'>
@@ -36,7 +39,7 @@ export default function BookingInformation(props) {
               </div>
             </Fade>
           </div>
-          <div style={{ paddingLeft: 80 }} className='col-5 py-5'>
+          <div className='col-12 two-booking col-lg-5 py-3'>
             <Fade delay={600}>
               <label htmlFor='firstName'>First Name</label>
               <InputText
