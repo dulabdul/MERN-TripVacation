@@ -81,22 +81,11 @@ export default function Hero(props) {
           </div>
           <div className='col-12 col-md-6 col-lg-6'>
             <div className='hero-image-container'>
-              <img
-                src={ImgHero}
-                className='position-absolute'
-                alt='Hero'
-                style={{
-                  margin: '0 0 0 -30px',
-                  zIndex: 1,
-                }}
-              />
+              <img src={ImgHero} className='position-absolute' alt='Hero' />
               <img
                 src={ImgHeroFrame}
                 className='position-absolute'
                 alt='Hero Frame'
-                style={{
-                  margin: '30px -15px -15px 0',
-                }}
               />
             </div>
           </div>
