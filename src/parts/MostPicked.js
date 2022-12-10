@@ -5,8 +5,7 @@ export default function MostPicked(props) {
   return (
     <section
       className='container container-mostpicked'
-      ref={props.refMostPicked}
-    >
+      ref={props.refMostPicked}>
       <Fade bottom>
         <h4 className='mb-1'>Most Picked</h4>
         <div className='container-grid'>
@@ -14,9 +13,10 @@ export default function MostPicked(props) {
             return (
               <div
                 key={`mostpicked ${index}`}
-                className={`item column-4 ${index === 0 ? 'row-2' : 'row-1'}`}
-              >
-                <Fade bottom delay={500 * index}>
+                className={`item column-4 ${index === 0 ? 'row-2' : 'row-1'}`}>
+                <Fade
+                  bottom
+                  delay={500 * index}>
                   <div className='card card-featured'>
                     <div className='tag'>
                       ${item.price}
@@ -37,8 +37,7 @@ export default function MostPicked(props) {
                       <Button
                         type='link'
                         className='stretched-link d-block text-white'
-                        href={`/properties/${item._id}`}
-                      >
+                        href={`/properties/${item._id}`}>
                         <h5>{item.title}</h5>
                       </Button>
                       <span>

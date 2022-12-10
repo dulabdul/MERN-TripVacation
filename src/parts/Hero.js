@@ -26,8 +26,7 @@ export default function Hero(props) {
             </h1>
             <p
               className='pt-3 fw-light text-gray-500 w-75'
-              style={{ lineHeight: '170%' }}
-            >
+              style={{ lineHeight: '170%' }}>
               We provide what you need to enjoy your holiday with family. Time
               to make another memorable moments.
             </p>
@@ -36,8 +35,7 @@ export default function Hero(props) {
               hasShadow
               isPrimary
               isWidthAuto
-              onClick={showMostPicked}
-            >
+              onClick={showMostPicked}>
               Show Me Now
             </Button>
             <div className='pt-5 icons-hero row align-items-end justify-content-between'>
@@ -81,7 +79,11 @@ export default function Hero(props) {
           </div>
           <div className='col-12 col-md-6 col-lg-6'>
             <div className='hero-image-container'>
-              <img src={ImgHero} className='position-absolute' alt='Hero' />
+              <img
+                src={ImgHero}
+                className='position-absolute'
+                alt='Hero'
+              />
               <img
                 src={ImgHeroFrame}
                 className='position-absolute'

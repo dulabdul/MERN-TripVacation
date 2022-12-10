@@ -26,7 +26,10 @@ class LandingPage extends React.Component {
     return (
       <>
         <Header {...this.props}></Header>
-        <Hero refMostPicked={this.refMostPicked} data={page.landingPage.hero} />
+        <Hero
+          refMostPicked={this.refMostPicked}
+          data={page.landingPage.hero}
+        />
         <MostPicked
           refMostPicked={this.refMostPicked}
           data={page.landingPage.mostPicked}
