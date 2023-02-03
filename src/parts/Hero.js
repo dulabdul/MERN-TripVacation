@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ImgHero from 'assets/images/img-hero.jpg';
 import ImgHeroFrame from 'assets/images/img-hero-frame.jpg';
 import IconTraveler from 'assets/images/icons/ic_traveler.svg';
@@ -7,14 +7,28 @@ import IconTreasure from 'assets/images/icons/ic_treasure.svg';
 import Button from 'elements/button';
 import formatNumber from 'utils/formatNumber';
 import Fade from 'react-reveal/Fade';
-export default function Hero(props) {
-  function showMostPicked() {
+import { useAxios } from 'use-axios-client';
+export default function Hero({ mostPickedRef }) {
+  const [heroData, setHeroData] = useState(null);
+  const [isLoading, setIsLoading] = useState(null);
+  const { data, error, loading } = useAxios({
+    url: `${process.env.REACT_APP_HOST}/api/v1/member/hero`,
+  });
+  useEffect(() => {
+    setHeroData(data?.hero);
+    setIsLoading(loading);
+  }, [data, loading, setIsLoading]);
+  const handleShowMostPicked = (ref) => {
     window.scrollTo({
-      top: props.refMostPicked.current.offsetTop - 30,
+      top: ref.offsetTop - 30,
       behavior: 'smooth',
     });
-  }
-  return (
+  };
+  console.log(isLoading);
+  console.log(heroData);
+  return isLoading ? (
+    'Loading'
+  ) : (
     <Fade bottom>
       <section className='container hero-container'>
         <div className='row align-items-center'>
@@ -35,7 +49,7 @@ export default function Hero(props) {
               hasShadow
               isPrimary
               isWidthAuto
-              onClick={showMostPicked}>
+              onClick={() => handleShowMostPicked(mostPickedRef.current)}>
               Show Me Now
             </Button>
             <div className='pt-5 icons-hero row align-items-end justify-content-between'>
@@ -44,10 +58,10 @@ export default function Hero(props) {
                   src={IconTraveler}
                   width='36'
                   height='36'
-                  alt={`${props.data.travelers} Travelers`}
+                  alt={`${heroData?.travelers} Travelers`}
                 />
                 <h6 className='mt-2 fw-bold'>
-                  {formatNumber(props.data.travelers)}
+                  {formatNumber(heroData?.travelers)}
                   <span className='text-gray-500 fw-light'> Travelers</span>
                 </h6>
               </div>
@@ -56,10 +70,10 @@ export default function Hero(props) {
                   src={IconCities}
                   width='36'
                   height='36'
-                  alt={`${props.data.cities} Cities`}
+                  alt={`${heroData?.cities} Cities`}
                 />
                 <h6 className='mt-2 fw-bold'>
-                  {formatNumber(props.data.cities)}
+                  {formatNumber(heroData?.cities)}
                   <span className='text-gray-500 fw-light'> Cities</span>
                 </h6>
               </div>
@@ -68,10 +82,10 @@ export default function Hero(props) {
                   src={IconTreasure}
                   width='36'
                   height='36'
-                  alt={`${props.data.treasures} Treasures`}
+                  alt={`${heroData?.treasures} Treasures`}
                 />
                 <h6 className='mt-2 fw-bold'>
-                  {formatNumber(props.data.treasures)}
+                  {formatNumber(heroData?.treasures)}
                   <span className='text-gray-500 fw-light'> Treasures</span>
                 </h6>
               </div>

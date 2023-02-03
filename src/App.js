@@ -17,7 +17,6 @@ function App() {
           element={<LandingPage />}
         />
         <Route
-          exact
           path='/properties/:id'
           element={<DetailsPage />}
         />

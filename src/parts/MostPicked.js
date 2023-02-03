@@ -1,15 +1,25 @@
 import Button from 'elements/button';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Fade from 'react-reveal/Fade';
-export default function MostPicked(props) {
+import { useAxios } from 'use-axios-client';
+
+export default function MostPicked({ mostPickedRef }) {
+  const [mostPickedData, setMostPickedData] = useState(null);
+  const { data, error, isLoading } = useAxios({
+    url: `${process.env.REACT_APP_HOST}/api/v1/member/most-picked`,
+  });
+  useEffect(() => {
+    setMostPickedData(data?.mostPicked);
+  }, [data]);
+
   return (
     <section
-      className='container container-mostpicked'
-      ref={props.refMostPicked}>
+      ref={mostPickedRef}
+      className='container container-mostpicked'>
       <Fade bottom>
         <h4 className='mb-1'>Most Picked</h4>
         <div className='container-grid'>
-          {props.data.map((item, index) => {
+          {mostPickedData?.map((item, index) => {
             return (
               <div
                 key={`mostpicked ${index}`}
